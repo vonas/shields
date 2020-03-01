@@ -1,10 +1,10 @@
 'use strict'
 
-const Joi = require('@hapi/joi')
 const {
   isPackageLockJsonWithDependencies,
   getLockDependencyVersion,
 } = require('../package-lock-json-helpers')
+const { ConditionalGithubAuthV3Service } = require('./github-auth-service')
 const { fetchJsonFromRepo } = require('./github-common-fetch')
 const { documentation } = require('./github-helpers')
 const { BaseJsonService } = require('..')
