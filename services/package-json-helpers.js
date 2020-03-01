@@ -3,14 +3,13 @@
 const Joi = require('@hapi/joi')
 const { InvalidParameter } = require('.')
 
+// This accepts a semver range, a URL, and many other possible values.
+const isNpmVersion = Joi.string()
+  .min(1)
+  .required()
+
 const isDependencyMap = Joi.object()
-  .pattern(
-    /./,
-    // This accepts a semver range, a URL, and many other possible values.
-    Joi.string()
-      .min(1)
-      .required()
-  )
+  .pattern(/./, isNpmVersion)
   .default({})
 
 const isPackageJsonWithDependencies = Joi.object({
@@ -48,6 +47,7 @@ function getDependencyVersion({
 }
 
 module.exports = {
+  isNpmVersion,
   isDependencyMap,
   isPackageJsonWithDependencies,
   getDependencyVersion,
